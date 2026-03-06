@@ -22,9 +22,21 @@ All responses are delivered via Telegram. Use standard Markdown:
 
 ## Tabular data
 
-Use lists instead of tables:
+Never use markdown tables (`| col |`). Use this exact format instead:
 
+**2 columns (key-value):**
 ```
-**Metric:** value
+**Key:** value
 **Other:** value
 ```
+
+**3+ columns:**
+Header line with all cells bold, then one bullet per row, first cell bold, cells separated by ` — `:
+```
+**Col1** | **Col2** | **Col3**
+
+- **Row1Col1** — Row1Col2 — Row1Col3
+- **Row2Col1** — Row2Col2 — Row2Col3
+```
+
+Always put a blank line between the header and the rows.
