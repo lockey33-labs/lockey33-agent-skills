@@ -1,11 +1,9 @@
-# My Agent Skills
+# lockey33-agent-skills
+
+Skills for Diego, Laurent's AI agent. Each subfolder contains a `SKILL.md` describing a capability.
 
 ## Available skills
 
-- `session-handoff`: resume Claude/Codex context from a session ID.
-
-## Install
-
-```bash
-npx skills add <GITHUB_USER>/my-agent-skills@session-handoff -g -y
-```
+- `session-handoff` — resume a Claude/Codex/Kimi session from a session ID
+- `telegram-output` — formatting rules for Telegram responses
+- `memory` — long-term memory management across sessions
