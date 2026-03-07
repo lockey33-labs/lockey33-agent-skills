@@ -80,3 +80,5 @@
 **Liens Notion** :
 - Exploration : https://www.notion.so/URL-Shortener-Avanc-31c5d20f187281a99e3ef838b2d7fe58
 - Sprint P1 : https://www.notion.so/MVP-URL-Shortener-Avanc-31c5d20f187281bcad00dabdd63dc6f1
+
+<!-- Last auto-sync: 2026-03-07T22:59:31+00:00 -->
