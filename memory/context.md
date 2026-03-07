@@ -1,72 +1,74 @@
 # Session Context — lockey33-agent
 
-## 2026-03-07 — Cron Jobs ACTIFS & PUSH GITHUB RÉUSSI ✅
+## 2026-03-07 — Sync GitHub OK / Sync Notion à finaliser
 
-### Infrastructure Cron — OPÉRATIONNELLE
+### Infrastructure Cron — CONFIGURÉE
 
-**Installation** : cron démarré (PID 758)
+**Cron réinstallé et actif**
 
 **Crontab** :
 ```
 */30 * * * *  →  Agent Memory Sync (GitHub) ✅
-0 * * * *     →  Cron Jobs Tracker Sync (Notion) ⏸️
+0 * * * *     →  Cron Jobs Tracker Sync via Kimi CLI ⏸️
 ```
 
-**GitHub Sync — CORRIGÉ & TESTÉ**
+**GitHub Sync — OPÉRATIONNEL**
 - ✅ Token trouvé : `/home/agent/.git-credentials`
-- ✅ Credential helper configuré dans le script
-- ✅ **Test push réussi** : commit `a77ba5b` pushed
+- ✅ Push automatique testé et fonctionnel
+- ✅ Dernier push : `aa233af`
 
-**Notion Sync — BLOCAGE IDENTIFIÉ**
-- ❌ Le MCP bridgeai n'est pas accessible depuis les scripts shell
-- ❌ Un cron ne peut pas appeler les outils MCP (outils agent uniquement)
-- ⏳ **Decision requise** : utiliser API Notion directe (token nécessaire) ou sync manuelle
+**Notion Sync — BLOCAGE TECHNIQUE**
 
----
+| Approche | Statut | Problème |
+|----------|--------|----------|
+| MCP via agent | ✅ Fonctionne | Nécessite intervention manuelle |
+| MCP via cron | ❌ Bloqué | MCP bridgeai inaccessible hors agent |
+| Kimi CLI dans cron | ❌ Bloqué | CLI interactive, bloque sur input |
+| API Notion directe | ⏳ Possible | Nécessite token Notion (internal integration) |
 
-## 2026-03-07 — Cleanup Cron Jobs Notion ✅
-
-### Nettoyage effectué
-- ❌ "Cron Jobs — Dashboard" supprimé
-- ❌ "SYNC — Cron Jobs vers Notion" supprimé
-- ✅ Structure : page parent + database propre
+**Solution recommandée** : API Notion directe avec token, ou sync manuelle par l'agent.
 
 ---
 
 ## 🎯 Prochaines Étapes
+
+### Option A : API Notion directe (auto)
+- Créer internal integration token sur notion.so/my-integrations
+- Modifier `sync-cron-to-notion.sh` pour utiliser `curl` vers api.notion.com
+
+### Option B : Sync manuelle (actuel)
+- Je peux peupler la database Notion quand tu me le demandes
+- Pas besoin de token supplémentaire
 
 ### URL Shortener (P1 - Urgent)
 1. **Ce weekend** : Landing page + 5 pré-ventes
 2. **Semaine prochaine** : Setup repo GitHub + début MVP
 3. **Deadline** : 21 mars 2026
 
-### Infrastructure
-- ✅ Memory sync GitHub : auto (toutes les 30 min)
-- ⏳ Cron sync Notion : décider approche (API directe ou manuel)
-
 ---
 
 ## 🔧 Environnement
 
-**Container** : Podman rootless → Workspace agent (Ubuntu)
-**Cron** : actif (memory sync OK)
-**GitHub** : push automatique configuré
+**Container** : Podman rootless
+**Cron** : installé, configuré, actif
+**GitHub** : push automatique ✅
+**Notion MCP** : agent uniquement
 
 **Scripts** :
 - `/home/agent/.scripts/sync-memory.sh` — ✅ opérationnel
-- `/home/agent/.scripts/sync-cron-to-notion.sh` — en attente (besoin token Notion ou approche différente)
+- `/home/agent/.scripts/sync-cron-via-kimi.sh` — créé (mais CLI interactive)
+- `/home/agent/.scripts/sync-cron-to-notion.sh` — à adapter pour API directe
 
 ---
 
 ## 💾 Persistence
 
 **GitHub** : `lockey33-labs/lockey33-agent-skills/memory/`
-- Dernier push : `a77ba5b` (2026-03-07 22:59)
-- Sync : automatique (toutes les 30 min)
+- Sync automatique toutes les 30 min ✅
 
 **Notion** :
 - Cron Database : https://www.notion.so/31c5d20f187281bafbec45cf78e5d6e
-- Sync : manuelle (via agent) ou à configurer
+- Sync : manuelle ou à configurer avec token
 
 ---
 
@@ -74,7 +76,3 @@
 **Decision** : URL Shortener Avancé (91/100 score)
 **Stack** : Next.js + Tailwind + PostgreSQL + Redis + Cloudflare Workers
 **Deadline** : 21 mars 2026
-
-**Liens Notion** :
-- Exploration : https://www.notion.so/URL-Shortener-Avanc-31c5d20f187281a99e3ef838b2d7fe58
-- Sprint P1 : https://www.notion.so/MVP-URL-Shortener-Avanc-31c5d20f187281bcad00dabdd63dc6f1
